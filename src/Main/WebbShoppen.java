@@ -46,7 +46,7 @@ public class WebbShoppen {
         temp = kundvagnsList.stream().filter(k -> k.getKund().getNamn().equalsIgnoreCase(kund.getNamn())).toList();
 
 
-        boolean yeah = beställningList.stream().map(Beställning::getId).toList().contains(temp.size()-1);       //Kollar ifall användar
+        boolean yeah = beställningList.stream().map(Beställning::getId).toList().contains(temp.size()-1);       //Kollar ifall det behövs en ny kundvagn
         System.out.println(yeah);
 
         if(!yeah){
