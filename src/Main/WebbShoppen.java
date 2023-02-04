@@ -179,14 +179,16 @@ public class WebbShoppen {
                    Villken rapport vill du läsa?
                    1. Totalbelopp per kund.
                    2. Antal varor tillagda per kund.
-                   3. Totalbelopp per ort.
+                   3. Totalbelopp per ort
+                   4. Antal ordrar per kund.
                    """);
         String svar = sc.nextLine();
         switch (svar) {
             case ("1") -> rapport.totalbelopp();
             case ("2") -> rapport.antalVarorTillagda();
             case ("3") -> rapport.beloppPerOrt();
-            default -> System.out.println("Skriv siffra mellan 1-3");
+            case ("4") -> rapport.antalOrdrar();
+            default -> System.out.println("Skriv siffra mellan 1-4");
         }
     }
 

@@ -5,6 +5,7 @@ import Komponenter.Kund;
 import Komponenter.Kundvagn;
 import Komponenter.Sko;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -32,7 +33,7 @@ public class Rapporter {
 
     public void antalVarorTillagda(){
         Map<String, Long> prisMap2 = beställningList.stream().collect(Collectors.toMap(n -> n.getKundvagn().getKund().getNamn(),
-                b -> b.getKundvagn().getSko().stream().mapToInt(Sko::getId).count()));
+                b -> b.getKundvagn().getSko().stream().mapToInt(Sko::getId).count(), Long::sum));
 
         prisMap2.forEach((k,v) -> System.out.println(k +", Tillagda produkter: "+ v));
     }
@@ -42,6 +43,12 @@ public class Rapporter {
                 b -> b.getKundvagn().getSko().stream().mapToInt(Sko::getPris).reduce(0, Integer::sum), Integer::sum));
 
         prisMap.forEach((k,v) -> System.out.println(k +", Totalbelopp: "+ v));
+    }
+
+    public void antalOrdrar(){
+        Map<String, Long> prisMap2 = beställningList.stream().collect(Collectors.groupingBy(n -> n.getKundvagn().getKund().getNamn(), Collectors.counting()));
+
+        prisMap2.forEach((k,v) -> System.out.println(k +", ordrar: "+ v));
     }
 
 
