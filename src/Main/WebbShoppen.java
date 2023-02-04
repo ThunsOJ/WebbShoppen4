@@ -9,8 +9,7 @@ import Repositories.KundRepository;
 import Repositories.KundvagnRepository;
 import Repositories.SkoRepository;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class WebbShoppen {
     private final SkoRepository skoRepo = new SkoRepository();
@@ -36,13 +35,27 @@ public class WebbShoppen {
 
 
     public WebbShoppen() {
+        List<Kundvagn> temp;
         kundList = laddaKunder();
         skoList = laddaSkor();
         kundvagnsList = laddaKundvagnar();
         beställningList = laddaBeställningar();
         rapport = new Rapporter(kundList,kundvagnsList,skoList,beställningList);
         kund = login();
-        kundvagn = kundvagnsList.stream().filter(k -> k.getKund().getNamn().equalsIgnoreCase(kund.getNamn())).toList().get(0);
+
+        temp = kundvagnsList.stream().filter(k -> k.getKund().getNamn().equalsIgnoreCase(kund.getNamn())).toList();
+
+
+        boolean yeah = beställningList.stream().map(Beställning::getId).toList().contains(temp.size()-1);       //Kollar ifall användar
+        System.out.println(yeah);
+
+        if(!yeah){
+            kundvagn = new Kundvagn(kundvagnsList.size()+1,null,kund);
+        } else {
+            kundvagn = temp.get(temp.size()-1);
+        }
+
+        System.out.println(kundvagn.getId());
 
 
         System.out.println("Välkommen " + kund.getNamn());

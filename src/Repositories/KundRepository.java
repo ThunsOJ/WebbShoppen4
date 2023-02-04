@@ -42,7 +42,7 @@ public class KundRepository {
             }
             return kundLista;
         } catch (SQLException e) {
-            System.out.println("ajajaj");
+            System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
     }

@@ -67,7 +67,7 @@ public class KundvagnRepository {
             }
             return nyLista;
         } catch (SQLException e) {
-            System.out.println("ajajaj");
+            System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
     }
